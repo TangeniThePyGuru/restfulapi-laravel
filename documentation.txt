@@ -1,0 +1,12 @@
+files:
+    add domain to config file /etc/hosts
+
+commands:
+    php vendor/bin/homestead make -> prepare and configure homestead on linux
+    vagrant up -> boot up a vm
+    vagrant halt -> switch of the machine
+    vagrant destroy -> destroys the machine
+    vagrant ssh -> vagrant exit
+
+problems encountered:
+    don't use x.dev it does not work, but use x.test
