@@ -10,3 +10,10 @@ commands:
 
 problems encountered:
     don't use x.dev it does not work, but use x.test
+
+
+    ----------
+
+API Routes
+    Go to RouteServiceProvider
+    Go to method mapApiRoutes() -> remove the prefix method
