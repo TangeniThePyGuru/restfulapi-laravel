@@ -17,3 +17,7 @@ problems encountered:
 API Routes
     Go to RouteServiceProvider
     Go to method mapApiRoutes() -> remove the prefix method
+
+Laravel 5.4 >
+    always include
+        Schema::defaultStringLength(191) method inside the AppServiceProvider boot() method
