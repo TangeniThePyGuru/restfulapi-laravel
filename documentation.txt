@@ -21,3 +21,9 @@ API Routes
 Laravel 5.4 >
     always include
         Schema::defaultStringLength(191) method inside the AppServiceProvider boot() method
+
+Info
+    A string has 255 characters by default
+
+Creating pivot tables
+    php artisan make:migration category_product_table --create=category_product
