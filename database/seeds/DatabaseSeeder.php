@@ -33,8 +33,7 @@ class DatabaseSeeder extends Seeder
         factory(\App\Category::class, $categoriesQuantity)->create();
         factory(\App\Product::class, $productsQuantity)->create()->each(function ($product){
             $categories = \App\Category::all()->random(mt_rand(1,5))->pluck('id');
-
-            $product->categories->attach($categories);
+            $product->categories()->attach($categories);
         });
         factory(\App\Transaction::class, $transactionsQuantity)->create();
 
