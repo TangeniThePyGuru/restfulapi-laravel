@@ -46,7 +46,7 @@ $factory->define(App\Product::class, function (Faker $faker) {
 
 $factory->define(App\Transaction::class, function (Faker $faker) {
 
-    $seller = \App\Seller::has('product')->get()->random();
+    $seller = \App\Seller::has('products')->get()->random();
     $buyer = \App\User::all()->except($seller->id)->random();
 
     return [
