@@ -27,3 +27,7 @@ Info
 
 Creating pivot tables
     php artisan make:migration category_product_table --create=category_product
+
+Executing seeders
+     Call to a member function attach() on null
+        - needed to add the return keyword
