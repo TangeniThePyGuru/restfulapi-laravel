@@ -62,26 +62,26 @@ class Handler extends ExceptionHandler
         if ($exception instanceof ValidationException){
             return $this->convertValidationExceptionToResponse($exception, $request);
         }
-
+        // hanled the model not found exception
         if ($exception instanceof ModelNotFoundException) {
             $modeName = class_basename($exception->getModel());
             return $this->errorResponse("{$modeName} with specified identifier does not exist.",
                 404);
         }
-
+        // handle the authentication Exception
         if ($exception instanceof AuthenticationException){
             return $this->unauthenticated($request, $exception);
         }
-
+        // handles authorization
         if ($exception instanceof AuthorizationException){
             // error code 403 represents unauthorized user
             return $this->errorResponse($exception->getMessage(), 403);
         }
-
+        // handles the case when user requests an api URL with an invalid HTTP request method
         if ($exception instanceof MethodNotAllowedHttpException){
             return $this->errorResponse('The specified method for the request is invalid', 405);
         }
-
+        // handles the case when a user requests for a URL that does not exist
         if ($exception instanceof NotFoundHttpException){
             return $this->errorResponse('The specified URL cannot be found', 404);
         }
@@ -101,6 +101,7 @@ class Handler extends ExceptionHandler
      * @param  \Illuminate\Auth\AuthenticationException  $exception
      * @return \Illuminate\Http\Response
      */
+    // override the unauthenticated method
     protected function unauthenticated($request, AuthenticationException $exception)
     {
         return $this->errorResponse('Unauthenticated',401);
@@ -113,12 +114,13 @@ class Handler extends ExceptionHandler
      * @param  \Illuminate\Http\Request  $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
+    // converts validations exceptions to responses
     protected function convertValidationExceptionToResponse(ValidationException $e, $request)
     {
         if ($e->response) {
             return $e->response;
         }
-
+        // get all the validation errors for the exception
         $errors = $e->validator->errors()->getMessages();
 
         return $this->errorResponse($errors, 422);
