@@ -9,7 +9,9 @@ use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -76,8 +78,17 @@ class Handler extends ExceptionHandler
             return $this->errorResponse($exception->getMessage(), 403);
         }
 
+        if ($exception instanceof MethodNotAllowedHttpException){
+            return $this->errorResponse('The specified method for the request is invalid', 405);
+        }
+
         if ($exception instanceof NotFoundHttpException){
-            return $this->errorResponse('The specified error cannot be found', 404);
+            return $this->errorResponse('The specified URL cannot be found', 404);
+        }
+
+        // handles all the possible exceptions that we did not cater for
+        if ($exception instanceof HttpException){
+            return $this->errorResponse($exception->getMessage(), $exception->getStatusCode());
         }
 
         return parent::render($request, $exception);
@@ -92,9 +103,7 @@ class Handler extends ExceptionHandler
      */
     protected function unauthenticated($request, AuthenticationException $exception)
     {
-        return $request->expectsJson()
-            ? response()->json(['message' => $exception->getMessage()], 401)
-            : redirect()->guest(route('login'));
+        return $this->errorResponse('Unauthenticated',401);
     }
 
     /**
