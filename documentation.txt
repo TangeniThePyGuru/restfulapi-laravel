@@ -31,3 +31,10 @@ Creating pivot tables
 Executing seeders
      Call to a member function attach() on null
         - needed to add the return keyword
+
+Exception handling
+     - under the Exceptions folder we find a Handler Class
+     - with method render()
+        - executed every time an exception occurs
+     - method report()
+        - executed every time but only to report to the log file
