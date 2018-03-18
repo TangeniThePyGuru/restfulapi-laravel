@@ -38,3 +38,11 @@ Exception handling
         - executed every time an exception occurs
      - method report()
         - executed every time but only to report to the log file
+  NotFoundHttpException
+  MethodNotAllowedHttpException
+  ModelNotFoundException
+  AuthenticationException
+  AuthorizationException
+
+Implicit Model Binding
+     - not using the $id but the Model Class
