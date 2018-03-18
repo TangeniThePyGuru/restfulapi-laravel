@@ -16,10 +16,10 @@ class UserController extends ApiController
      */
     public function index()
     {
-        $user = User::all();
+        $users = User::all();
 
         // code 200 means successful
-        return response()->json(['data' => $user], 200);
+        return $this->showAll($users);
     }
 
 
@@ -48,7 +48,7 @@ class UserController extends ApiController
 
         $user = User::create($data);
         // code 201 mean created
-        return response()->json(['data' => $user], 201);
+        return $this->showOne($user, 201);
     }
 
     /**
@@ -61,7 +61,7 @@ class UserController extends ApiController
     {
         $user = User::findOrfail($id);
 
-        return response()->json(['data' => $user], 200);
+        return $this->showOne($user);
     }
 
 
@@ -104,9 +104,7 @@ class UserController extends ApiController
             // if user if not verified
             if (!$user->isVerified()){
                 // code 409 specifies a conflict
-                return response()->json([
-                    'error' => 'Only verified users can modify the admin field','code' => '409'
-                ], 409);
+                return  $this->errorResponse('Only verified users can modify the admin field', 409);
             }
 
             $user->admin = $request->admin;
@@ -114,15 +112,13 @@ class UserController extends ApiController
 
         // if isDirty() return true, which means that a users did not pass any fields
         if (!$user->isDirty()){
-            // code
-            return response()->json([
-                'error' => 'You need to specify a different value to update','code' => '422'
-            ], 422);
+            // code 422 specifies unproccesible entity
+            return  $this->errorResponse('You need to specify a different value to update', 422);
         }
         // if all is fine save / update the user, and return the user and a response code
         $user->save();
 
-        return response()->json(['data' => $user], 200);
+        return $this->showOne($user, 200);
 
     }
 
@@ -138,6 +134,6 @@ class UserController extends ApiController
 
         $user->delete();
         // code 200 means successful
-        return response()->json(['data' => $user], 200);
+        return $this->showOne($user, 200);
     }
 }
