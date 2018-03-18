@@ -94,7 +94,6 @@ class Handler extends ExceptionHandler
 
         // handles for when you try to remove a resource that has other resources depending on it
         if ($exception instanceof QueryException){
-//            dd(var_dump($exception));
             $errorCode = $exception->errorInfo[1];
 
             if ($errorCode == 1451){
@@ -104,7 +103,12 @@ class Handler extends ExceptionHandler
             }
         }
 
-        return parent::render($request, $exception);
+        // handles the exception when the database server is not responding (off / unreachable) in development
+        if (config('app.debug')){
+            return parent::render($request, $exception);
+        }
+        // handles the exception when the database server is not responding (off / unreachable) in production
+        return $this->errorResponse('Unexpected Exception. Try later', 500);
     }
 
     /**
