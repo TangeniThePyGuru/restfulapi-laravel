@@ -7,6 +7,7 @@ use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
@@ -89,6 +90,18 @@ class Handler extends ExceptionHandler
         // handles all the possible exceptions that we did not cater for
         if ($exception instanceof HttpException){
             return $this->errorResponse($exception->getMessage(), $exception->getStatusCode());
+        }
+
+        // handles for when you try to remove a resource that has other resources depending on it
+        if ($exception instanceof QueryException){
+//            dd(var_dump($exception));
+            $errorCode = $exception->errorInfo[1];
+
+            if ($errorCode == 1451){
+                // code 409 mean conflict
+                return $this->errorResponse('Cannot remove this resource permanently, it is related ot other resources',
+                    409);
+            }
         }
 
         return parent::render($request, $exception);
