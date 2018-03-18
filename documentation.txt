@@ -46,3 +46,5 @@ Exception handling
 
 Implicit Model Binding
      - not using the $id but the Model Class
+     - does not apply to all models - in case of special models like the buyer
+       we can create a scope to help us add filters to our model.
