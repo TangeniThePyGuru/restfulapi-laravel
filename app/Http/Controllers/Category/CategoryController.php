@@ -63,7 +63,23 @@ class CategoryController extends ApiController
      */
     public function update(Request $request, Category $category)
     {
-        //
+        // make sure that only those fields are passed and updated
+        $category->fill($request->only([
+            'name',
+            'description'
+        ]));
+
+        // if it not changed, throw exception
+        if ($category->isClean()){
+            // 422
+            return $this->errorResponse('You need to specify a different value to update', 422);
+        }
+
+        // if it changed, update
+        $category->save();
+
+        return $this->showOne($category);
+
     }
 
     /**
