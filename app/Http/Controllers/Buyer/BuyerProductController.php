@@ -19,6 +19,7 @@ class BuyerProductController extends ApiController
         // eager loading at work
         // pluck enables you to ignore the other part of the object, and only return the
         // specified attribute
+        // many to many relation
         $products = $buyer->transactions()->with('product')
             ->get()
             ->pluck('product');

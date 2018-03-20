@@ -16,7 +16,7 @@ class BuyerTransactionController extends ApiController
      */
     public function index(Buyer $buyer)
     {
-
+        // one to many relation
         $transactions = $buyer->transactions;
 
         return $this->showAll($transactions);
