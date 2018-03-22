@@ -16,7 +16,7 @@ class CategorySellerController extends ApiController
      */
     public function index(Category $category)
     {
-        // values() removes any empty elements
+        // values() removes any empty elements that might exist
         $sellers = $category->products()->with('seller')
             ->get()
             ->pluck('seller')
