@@ -23,6 +23,12 @@ class Product extends Model
         'image',
         'seller_id'
     ];
+    /**
+     * @var array
+     *
+     * hides the pivot table
+     */
+    protected $hidden = ['pivot'];
 
     /**
      * @return bool
