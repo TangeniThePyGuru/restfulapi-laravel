@@ -53,3 +53,7 @@ Scopes
 
 Soft Deletes
      - Helps solve issues with foreign keys
+
+
+AppServiceProvider
+     - Events to be done in this file using the updated method in the model.
