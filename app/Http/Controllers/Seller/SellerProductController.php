@@ -88,6 +88,15 @@ class SellerProductController extends ApiController
                 return $this->errorResponse('An active product must have at least one category', 409);
             }
         }
+
+        // check if new image has been uploaded
+        if  ($request->hasFile('image')){
+            // deletes the old file
+           Storage::delete($product->image);
+            // updates with the new file
+           $product->image = $request->image->store();
+        }
+
         // represents that nothing has changed
         if ($product->isClean()){
             return $this->errorResponse('You need to specify a different value to update', 422);
