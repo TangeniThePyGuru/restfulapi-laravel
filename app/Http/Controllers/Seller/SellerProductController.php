@@ -24,16 +24,6 @@ class SellerProductController extends ApiController
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -53,34 +43,12 @@ class SellerProductController extends ApiController
         $data = $request->all();
 
         $data['status'] = Product::UNAVAILABLE_PRODUCT;
-        $data['image'] = '1.jpg';
+        $data['image'] = $request->image->store(); // store('path', 'fileSystem') takes the default values if non supplied
         $data['seller_id'] = $seller->id;
 
         $product = Product::create($data);
 
         return $this->showOne($product);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Seller  $seller
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Seller $seller)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Seller  $seller
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Seller $seller)
-    {
-        //
     }
 
     /**

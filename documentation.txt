@@ -57,3 +57,11 @@ Soft Deletes
 
 AppServiceProvider
      - Events to be done in this file using the updated method in the model.
+
+Uploading and Storing an Image
+     - configure the fileSystem - 'images' => [
+                                              'driver' => 'local',
+                                              'root' => public_path('img'),
+                                              'visibility' => 'public',
+                                          ],
+     - $request->image->store()
