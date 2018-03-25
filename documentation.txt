@@ -81,3 +81,6 @@ Mailer
 EventsFlushing
      - Events can be disabled using the Model::flushEventListeners();
      - This should be run before executing the create method of a model
+
+Dealing with Failing-Prone Actions
+     - surround your Mail sending action with the retry('times to retry', function() use Model{ 'actions' }, 'milliseconds to retry again (100)') helper
