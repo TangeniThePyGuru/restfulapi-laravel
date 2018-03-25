@@ -77,3 +77,7 @@ Mailer
      - the build method is automatically created
      - to pass the user details to the view file, pass the user through the constructor
        and they will be automatically passed to the view
+
+EventsFlushing
+     - Events can be disabled using the Model::flushEventListeners();
+     - This should be run before executing the create method of a model
