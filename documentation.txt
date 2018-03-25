@@ -65,3 +65,6 @@ Uploading and Storing an Image
                                               'visibility' => 'public',
                                           ],
      - $request->image->store()
+
+Email  Sending
+     - composer require guzzlehttp/guzzle
