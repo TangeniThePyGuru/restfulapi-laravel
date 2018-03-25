@@ -133,4 +133,19 @@ class UserController extends ApiController
         // code 200 means successful
         return $this->showOne($user, 200);
     }
+
+    public function verify($token){
+        // if not found a Model not found Exception will be triggered
+        $user = User::where('verification_token', '=', $token)->firstOrFail();
+
+        // change the verified status
+        $user->verified = User::VERIFIED_USER;
+
+        // remove the verification_token
+        $user->verification_token = null;
+
+        $user->save();
+
+        return $this->showMessage('The account has been verified successfully');
+    }
 }
