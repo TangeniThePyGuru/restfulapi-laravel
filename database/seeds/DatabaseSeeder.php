@@ -22,6 +22,12 @@ class DatabaseSeeder extends Seeder
 //      truncate the pivot table
         DB::table('category_product')->truncate();
 
+//        disables event listeners for development
+        \App\User::flushEventListeners();
+        \App\Category::flushEventListeners();
+        \App\Product::flushEventListeners();
+        \App\Transaction::flushEventListeners();
+
 
         $usersQuantity = 1000;
         $categoriesQuantity = 30;
