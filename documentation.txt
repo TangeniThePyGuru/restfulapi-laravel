@@ -74,3 +74,6 @@ User Verification
 
 Mailer
      - php artisan make:mail UserCreated
+     - the build method is automatically created
+     - to pass the user details to the view file, pass the user through the constructor
+       and they will be automatically passed to the view
