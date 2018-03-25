@@ -68,3 +68,9 @@ Uploading and Storing an Image
 
 Email  Sending
      - composer require guzzlehttp/guzzle
+
+User Verification
+     - change the verified status to verified and remove the verification_token
+
+Mailer
+     - php artisan make:mail UserCreated
