@@ -10,6 +10,7 @@ commands:
 
 problems encountered:
     don't use x.dev it does not work, but use x.test
+    Dotenv values containing spaces must be surrounded by quotes.
 
 
     ----------
@@ -84,3 +85,8 @@ EventsFlushing
 
 Dealing with Failing-Prone Actions
      - surround your Mail sending action with the retry('times to retry', function() use Model{ 'actions' }, 'milliseconds to retry again (100)') helper
+
+Using Laravel Markdown Mailables
+     - php artisan make:mail Test -m emails.test
+     - creates for us a Mailable class and a corresponding view
+     - available from Laravel 5.4*
