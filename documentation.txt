@@ -90,3 +90,10 @@ Using Laravel Markdown Mailables
      - php artisan make:mail Test -m emails.test
      - creates for us a Mailable class and a corresponding view
      - available from Laravel 5.4*
+
+Middleware
+     - only the named middleware can receive attributes
+     - php artisan make SignatureMiddleware
+     - SignatureMiddleware is an after middleware
+     - name the middleware, add it to the web and api middleware and pass it the parameter
+     - after and before middleware
