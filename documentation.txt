@@ -13,6 +13,7 @@ problems encountered:
     don't use x.dev it does not work, but use x.test
     Dotenv values containing spaces must be surrounded by quotes.
     fractal automatically includes a data attribute on the jsonResponse
+    when a change has been made to the .env file one needs to run the command php artisan clear:cache
 
     ----------
 
@@ -113,3 +114,7 @@ Transformers
             public $transformer = ModelTransformer::class;
      - create a protected function transformData($data, $transformer) in the ApiResponser
      - use this methods in the showOne() and showAll() methods
+
+Sorting the api request
+     - create a softData(Collection) method that sorts the collection
+     - pass the collection in the showAll() through this method and it will return a sorted collection which will be retrieved as sorted.
