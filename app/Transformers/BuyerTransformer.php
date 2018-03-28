@@ -15,7 +15,7 @@ class BuyerTransformer extends TransformerAbstract
     public function transform(Buyer $buyer)
     {
         return [
-            'id' => (string) $buyer->id,
+            'identifier' => (string) $buyer->id,
             'name' => (string) $buyer->name,
             'email' => (string) $buyer->email,
             'isVerified' => (int) $buyer->verified,

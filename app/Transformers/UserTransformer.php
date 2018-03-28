@@ -15,7 +15,7 @@ class UserTransformer extends TransformerAbstract
     public function transform(User $user)
     {
         return [
-            'id' => (string) $user->id,
+            'identifier' => (string) $user->id,
             'name' => (string) $user->name,
             'email' => (string) $user->email,
             'isVerified' => (int) $user->verified,
