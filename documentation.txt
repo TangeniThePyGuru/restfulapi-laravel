@@ -3,15 +3,16 @@ files:
 
 commands:
     php vendor/bin/homestead make -> prepare and configure homestead on linux
-    vagrant up -> boot up a vm
-    vagrant halt -> switch of the machine
-    vagrant destroy -> destroys the machine
-    vagrant ssh -> vagrant exit
+    vagrant up -> boot up your vagrant virtual machine
+    vagrant halt -> switch of the virtual machine
+    vagrant destroy -> destroys the virtual machine
+    vagrant ssh -> opens the vagrant virtual machine
+    vagrant exit -> exits the vagrant virtual machine
 
 problems encountered:
     don't use x.dev it does not work, but use x.test
     Dotenv values containing spaces must be surrounded by quotes.
-
+    fractal automatically includes a data attribute on the jsonResponse
 
     ----------
 
@@ -110,3 +111,5 @@ Transformers
      - linking a model to it's transformer
      - Add attribute
             public $transformer = ModelTransformer::class;
+     - create a protected function transformData($data, $transformer) in the ApiResponser
+     - use this methods in the showOne() and showAll() methods
