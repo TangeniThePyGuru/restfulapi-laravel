@@ -107,3 +107,6 @@ Transformers
          ....
          Spatie\Fractal\FractalServiceProvider::class,
      ]
+     - linking a model to it's transformer
+     - Add attribute
+            public $transformer = ModelTransformer::class;

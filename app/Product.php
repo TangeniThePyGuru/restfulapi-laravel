@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Transformers\ProductTransformer;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -30,6 +31,10 @@ class Product extends Model
      */
     protected $hidden = ['pivot'];
 
+    /**
+     * @var string
+     */
+    public $transformer = ProductTransformer::class;
     /**
      * @return bool
      *

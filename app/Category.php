@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Transformers\CategoryTransformer;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -18,6 +19,10 @@ class Category extends Model
      * hides the pivot table
      */
     protected $hidden = ['pivot'];
+    /**
+     * @var string
+     */
+    public $transformer = CategoryTransformer::class;
 
     public function products(){
         return $this->belongsToMany(Product::class);
