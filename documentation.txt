@@ -98,3 +98,12 @@ Middleware
      - name the middleware, add it to the web and api middleware and pass it the parameter
      - after and before middleware
      - right limiting middleware is called throttle request
+
+Transformers
+     - used to change attribute names without dealing with the database
+     - fractal
+     - composer require spatie/laravel-fractal
+     - config/app.php Providers = [
+         ....
+         Spatie\Fractal\FractalServiceProvider::class,
+     ]
