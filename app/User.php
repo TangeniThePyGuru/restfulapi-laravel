@@ -16,7 +16,7 @@ class User extends Authenticatable
     const UNVERIFIED_USER = '0';
 
     const ADMIN_USER = 'true';
-    const REGULAR_USER = 'FALSE';
+    const REGULAR_USER = 'false';
 
     protected $table = 'users';
 
