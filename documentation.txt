@@ -1,5 +1,7 @@
 files:
     add domain to config file /etc/hosts
+    php vendor/bin/homestead make
+    vagrant init
 
 commands:
     php vendor/bin/homestead make -> prepare and configure homestead on linux
@@ -118,3 +120,7 @@ Transformers
 Sorting the api request
      - create a softData(Collection) method that sorts the collection
      - pass the collection in the showAll() through this method and it will return a sorted collection which will be retrieved as sorted.
+   issues
+     - one can only sort using the original names of attributes
+   solution
+     - create method that maps the original attribute names to the transformed attribute names so that the client can use the names they see.

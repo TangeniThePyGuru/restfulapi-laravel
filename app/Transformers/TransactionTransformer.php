@@ -25,4 +25,27 @@ class TransactionTransformer extends TransformerAbstract
 
         ];
     }
+
+    /**
+     * @param $index
+     * @return mixed|null
+     *
+     * Maps the transformed attribute names to their original attribute names
+     */
+
+    public static function originalAttributes($index){
+
+        $attributes = [
+            'identifier' => 'id',
+            'quantity' => 'quantity_id',
+            'buyer' => 'buyer_id',
+            'product' => 'product_id',
+            'creationDate' => 'created_at',
+            'lastChange' => 'updated_at',
+            'deletedDate' => 'deleted_at',
+        ];
+
+        return isset($attributes[$index]) ? $attributes[$index] : null;
+
+    }
 }

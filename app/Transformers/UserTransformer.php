@@ -26,4 +26,28 @@ class UserTransformer extends TransformerAbstract
 
         ];
     }
+
+    /**
+     * @param $index
+     * @return mixed|null
+     *
+     * Maps the transformed attribute names to their original attribute names
+     */
+
+    public static function originalAttributes($index){
+
+        $attributes = [
+            'identifier' => 'id',
+            'name' => 'name',
+            'email' => 'email',
+            'isVerified' => 'verified',
+            'isAdmin' => 'admin',
+            'creationDate' => 'created_at',
+            'lastChange' => 'updated_at',
+            'deletedDate' => 'deleted_at',
+        ];
+
+        return isset($attributes[$index]) ? $attributes[$index] : null;
+
+    }
 }
