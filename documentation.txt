@@ -130,3 +130,6 @@ Pagination
     - refer to the paginate method in the api response
     - parameters can be passed into the url 'per_page' can be used to overwrite the size of the
     - as well as other parameters such as 'sort_by'
+
+HATEOAS
+    - refer to the transformer classes for more clarity on how HateOAS work
