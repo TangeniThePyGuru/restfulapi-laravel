@@ -166,8 +166,16 @@ trait ApiResponser
      */
     protected function cacheResponse($data){  // take note data is transformed into an array at this stage
         $url = request()->url();
+        $queryParams = request()->query();
+
+        ksort($queryParams);
+
+        $queryString = http_build_query($queryParams);
+
+        $fullUrl = "{$url}?{$queryString}";
+
         //pass it the url to remember for 30 seconds
-        return Cache::remember($url, 30/60, function () use($data){
+        return Cache::remember($fullUrl, 30/60, function () use($data){
             return $data;
         });
     }

@@ -120,7 +120,13 @@ Transformers
 Sorting the api request
      - create a softData(Collection) method that sorts the collection
      - pass the collection in the showAll() through this method and it will return a sorted collection which will be retrieved as sorted.
+     - parameters can be passed for sorting and querying specific data by passing the "attribute name" = X
    issues
      - one can only sort using the original names of attributes
    solution
      - create method that maps the original attribute names to the transformed attribute names so that the client can use the names they see.
+
+Pagination
+    - refer to the paginate method in the api response
+    - parameters can be passed into the url 'per_page' can be used to overwrite the size of the
+    - as well as other parameters such as 'sort_by'
