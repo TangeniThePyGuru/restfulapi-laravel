@@ -9,6 +9,7 @@ use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Session\TokenMismatchException;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -101,6 +102,11 @@ class Handler extends ExceptionHandler
                 return $this->errorResponse('Cannot remove this resource permanently, it is related ot other resources',
                     409);
             }
+        }
+
+//        handling the csrf TokenMismatchtokenException
+        if ($exception instanceof TokenMismatchException){
+            return redirect()->back()->withInput($request->input());
         }
 
         // handles the exception when the database server is not responding (off / unreachable) in development
