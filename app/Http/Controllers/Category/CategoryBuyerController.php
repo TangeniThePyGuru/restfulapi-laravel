@@ -10,9 +10,8 @@ use App\Http\Controllers\Controller;
 class CategoryBuyerController extends ApiController
 {
     /**
-     * Display a listing of the resource.
      * @param Category $category
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index(Category $category)
     {

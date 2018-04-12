@@ -5,10 +5,17 @@ namespace App\Http\Controllers\Product;
 use App\Category;
 use App\Http\Controllers\ApiController;
 use App\Product;
+use App\Transformers\CategoryTransformer;
 use Illuminate\Http\Request;
 
 class ProductCategoryController extends ApiController
 {
+    /**
+     * Middleware not needed in this controller as we are not doing any validations
+     *
+     */
+
+
     /**
      * Display a listing of the resource.
      * @param Product $product

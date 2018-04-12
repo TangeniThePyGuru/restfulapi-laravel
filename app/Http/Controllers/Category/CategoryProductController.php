@@ -8,9 +8,8 @@ use App\Http\Controllers\ApiController;
 class CategoryProductController extends ApiController
 {
     /**
-     * Display a listing of the resource.
      * @param Category $category
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index(Category $category)
     {
