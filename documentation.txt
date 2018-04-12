@@ -144,3 +144,7 @@ transformedAttribute() method
           }
     - the above constructor has been added to all the controllers where validation is required especially if there is a store and update method
       and it requires validation
+
+Auth Routes
+    - Navigate to The Router Class under illuminate
+    - copy everything the auth() method into your web routes files
