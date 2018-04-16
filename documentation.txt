@@ -173,3 +173,15 @@ Laravel Passport
         'client.credentials' => \Laravel\Passport\Http\Middleware\CheckClientCredentials::class, add to the middleware kernel
     - apply this middleware to resource controllers __construct()
         $this->middleware('client.credentials')->only(['index', 'show']);
+
+Getting the token
+    - creating clients
+        php artisan passport:client
+
+    - send the below parameter  to the route http://restfulapi.test/oauth/token with POST method
+      grant_type:client_credentials
+      client_id:3
+      client_secret:xIEsftPl0BmZdf8sFCBK3AfVwoF7ym5tyqwxBV6g
+
+    - use the retained token and pass it through as you request for data
+      pass it into this field Authorization Bearer xxxxxtokenxxxxx
