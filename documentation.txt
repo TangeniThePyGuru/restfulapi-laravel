@@ -163,3 +163,8 @@ Laravel Passport
                 Passport::routes();
             }
     - Route::post('oauth/token', '\Laravel\Passport\Http\Controllers\AccessTokenController@issueToken')
+    - go to config auth guards => [
+
+        driver => 'passport'
+
+      ]
