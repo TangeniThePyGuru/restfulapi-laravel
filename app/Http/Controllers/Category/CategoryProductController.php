@@ -7,6 +7,12 @@ use App\Http\Controllers\ApiController;
 
 class CategoryProductController extends ApiController
 {
+    public function __construct()
+    {
+        // protect the index controller
+        $this->middleware('client.credentials')->only(['index']);
+    }
+
     /**
      * @param Category $category
      * @return \Illuminate\Http\JsonResponse

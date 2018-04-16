@@ -168,3 +168,8 @@ Laravel Passport
         driver => 'passport'
 
       ]
+
+    - Add name middleware
+        'client.credentials' => \Laravel\Passport\Http\Middleware\CheckClientCredentials::class, add to the middleware kernel
+    - apply this middleware to resource controllers __construct()
+        $this->middleware('client.credentials')->only(['index', 'show']);
