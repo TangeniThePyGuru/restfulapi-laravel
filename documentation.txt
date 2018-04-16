@@ -5,6 +5,7 @@ files:
 
 commands:
     php vendor/bin/homestead make -> prepare and configure homestead on linux
+	vendor\\bin\\homestead make -> on windows
     vagrant up -> boot up your vagrant virtual machine
     vagrant halt -> switch of the virtual machine
     vagrant destroy -> destroys the virtual machine
