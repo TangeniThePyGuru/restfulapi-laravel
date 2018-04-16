@@ -155,3 +155,11 @@ Laravel Passport
     - run php artisan migrate to create tables
     - run php artisan passport:install to generate passport tokens
     - go to user model add HasApiToken trait
+    - register the required routes in the AuthServiceProvider
+        public function boot()
+            {
+                .
+                .
+                Passport::routes();
+            }
+    - Route::post('oauth/token', '\Laravel\Passport\Http\Controllers\AccessTokenController@issueToken')
