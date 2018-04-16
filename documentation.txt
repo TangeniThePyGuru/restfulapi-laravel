@@ -148,3 +148,7 @@ transformedAttribute() method
 Auth Routes
     - Navigate to The Router Class under illuminate
     - copy everything the auth() method into your web routes files
+
+Laravel Passport
+    - for laravel version lower than 5.6
+    - composer require laravel/passport:~4.0
