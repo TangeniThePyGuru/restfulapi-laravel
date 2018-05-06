@@ -199,3 +199,9 @@ Fixing Time Differences with Windows and Linux
       Ubuntu 15.04 systems and above (e.g. Ubuntu 16.04 LTS):
       open a terminal and execute the following command:
       timedatectl set-local-rtc 1
+
+    - Alternativly follow the URL - https://help.ubuntu.com/community/UbuntuTime
+
+ Fixing the key OAUTH file not found
+    - ssh into the machine and run:
+      php artisan passport:install
