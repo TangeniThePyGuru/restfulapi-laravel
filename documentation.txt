@@ -205,3 +205,6 @@ Fixing Time Differences with Windows and Linux
  Fixing the key OAUTH file not found
     - ssh into the machine and run:
       php artisan passport:install
+
+ Publishing the passport components
+    - php artisan vendor:publish --tag=passport-components
