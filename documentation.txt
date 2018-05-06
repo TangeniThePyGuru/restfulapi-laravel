@@ -208,3 +208,9 @@ Fixing Time Differences with Windows and Linux
 
  Publishing the passport components
     - php artisan vendor:publish --tag=passport-components
+
+    - install packages not from the VM but on your PC
+
+ Compiling our front-end files
+    - npm run dev - compiles once
+    - npm run watch - compiles every time a file is changed
