@@ -186,3 +186,16 @@ Getting the token
 
     - use the retained token and pass it through as you request for data
       pass it into this field Authorization Bearer xxxxxtokenxxxxx
+
+Fixing Time Differences with Windows and Linux
+    - Make Linux use 'Local' time
+      To tell your Ubuntu system that the hardware clock is set to 'local' time:
+
+      Pre-Ubuntu 15.04 systems (e.g. Ubuntu 14.04 LTS):
+      edit /etc/default/rcS
+      add or change the following section
+      # Set UTC=yes if your hardware clock is set to UTC (GMT)
+      UTC=no
+      Ubuntu 15.04 systems and above (e.g. Ubuntu 16.04 LTS):
+      open a terminal and execute the following command:
+      timedatectl set-local-rtc 1
