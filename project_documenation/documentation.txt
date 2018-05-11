@@ -261,3 +261,16 @@ Refreshing Expired Tokens
           "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6Ijk3YzU4NjkwOGIzYjdiYTUwZDdkNWQyMDI4ZDQzZDg5ODg4NDQ3NmE0NjVhYzk0ZjdjYWEwZjdlNDBjMzZkY2NmMjZlY2Q4YjI0MDFiMzE5In0.eyJhdWQiOiI0IiwianRpIjoiOTdjNTg2OTA4YjNiN2JhNTBkN2Q1ZDIwMjhkNDNkODk4ODg0NDc2YTQ2NWFjOTRmN2NhYTBmN2U0MGMzNmRjY2YyNmVjZDhiMjQwMWIzMTkiLCJpYXQiOjE1MjU4MTkyODAsIm5iZiI6MTUyNTgxOTI4MCwiZXhwIjoxNTI1ODE5MzEwLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.eeihfu-8tEU1OirlWc9pudd12R7CcPOBF3xQrLA7wVSVpVb9_-KtDJu80TkeYMbu4hTF_E7CyJCvH5qk4EaGBiCykWKk4-wOrM_p_mK77GwvOpXPrEs5_yOsAhGJTCHbuKT1dJMMkrovWt4_7ujxVrWHhrIRdAzxiKB8aEnkMkGMWsgcA1fQzsIULqDsnbm5km5ot6K20pg4C4xl3YIG7LwB96uly4fNgQnuylO9kRRhtisf7wg4dccAAlH9pJjkGWeXS5je_BxSxOGTk_C405akbnrRWZPs98NoxSrs9eQKFwYhCtKAkDae5AEaTVq2DUdTHfj4ZWbrKzC1A93-TaMx5v-5m7IywJlnd7gELgiPw0EsjdcseAbdQdlK11-e_21iUeteuOXLzFyucGOpzwCgkGLxfiB6WU2hCxbYACPUkYddlNlPiVwJkbVBHWdbL-R_uhz4QynU8NOfeZPG_QPI0o6UPlzIsvdiHQB0h3xNfzYjYQl5Vlsdsff0QSJ0YscQ6mAWwVdcmXR1s5q1qgIT49TleX-v5fWFrYoS5YlokWROd7ab1M5UOiWfxR2SyFwTIV4xlC2vEoeABSXAsVmz5bueOOCs7UW1FlXOmkopqoGvmDD9jxd5c8RfkCJ8BABzd-rgvz-jvPjEfIMTfhjNCBQ4i4HZRKN3wIPXOTA",
           "refresh_token": "def502005e59b39450d4ce40fc79543f3cb3b2a0bfa08ef6ed9abfbd47d1db078991ce836a25fd7bcf87bc60a79ca8137ceeb685cf684f7c004c4ebe6b0a2864734f4523e374cf4b9438020e84b6b88841be7ef10ba484c9dac162642888fe86f75c25bfca99cb6b28a49033a009d5ac9896ff9fb84aa90305724e52753b6c941e94cae65759311ed423f4df768c8145c3447b1d6bef85080dfe047d7ea6cdccf0d59d237a3093a1e9708ec39107c6cca5f5ba88e09b7df22f0a9840db49afc51bd572636bf628079ae37fc0aa1b6a041aa46a9f2858ab462251752bd3c08e1a7e7c424dd5ea483c594c96fb6e0fc4a56c6937a545bbe6b99951d112a06e233b998a065d38eea16d7fc15ccbd985d464b69412765a1ce9940be60d275ef946ac38001747ddb9c7d89ad0d722a68935da4b7593140f0138f46132e3a8e4720f8bf504169f671ec45058c74bc7e3bc939a77b90ab68c24ed9d949536fb2a4fe7ad69"
       }
+
+Scopes on OAuth2
+    - Allows us to state what a client can do
+    - Go to the AuthServiceProvider and add the following code
+    - Passport::tokensCan([
+      			'purchase-product' => 'Create a new transaction for a specific product',
+      			'manage-product' => 'Create, read, update, and delete products (CRUD)',
+      			'manage-account' => 'Read your account data, id, name, email, if verified, and if
+      								admin (cannot read password). Modify your account data (email, and password).
+      								 Cannot delete your account',
+      			'read-general' => 'Read general information like purchasing categories, purchased products,
+      			 					selling products, selling categories, your transactions (purchases and sales)'
+      		]);
