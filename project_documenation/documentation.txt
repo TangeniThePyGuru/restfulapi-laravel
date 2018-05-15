@@ -275,3 +275,5 @@ Scopes on OAuth2
       			 					selling products, selling categories, your transactions (purchases and sales)'
       		]);
     - add middlewares scope and scopes to the Kernel.php file
+    'scope' => \Laravel\Passport\Http\Middleware\CheckForAnyScope::class,
+    'scopes' => \Laravel\Passport\Http\Middleware\CheckScopes::class,
