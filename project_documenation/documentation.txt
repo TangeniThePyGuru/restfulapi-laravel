@@ -280,3 +280,26 @@ Scopes on OAuth2
     - add middlewares scope and scopes to the Kernel.php file
     'scope' => \Laravel\Passport\Http\Middleware\CheckForAnyScope::class,
     'scopes' => \Laravel\Passport\Http\Middleware\CheckScopes::class,
+
+
+Protecting you controller methods
+    - add the auth middleware at the beginning
+    - add the middleware using the scope/scopes middleware
+    - public function __construct()
+          {
+              parent::__construct();
+
+              $this->middleware('transform.input:'. ProductTransformer::class)->only(['store', 'update']);
+      		  $this->middleware('auth:api');
+      		  $this->middleware('scope:manage-product')->except('index');
+          }
+
+Requesting token along with scopes
+    - request http://restfulapi.test/oauth/token
+    - add fields: client_id:7
+                  client_secret:Dn5fbyOUbVRJ1qK6FpIDVHOAH6TNsrobTJuJrWfp
+                  grant_type:password
+                  username:ericka75@example.org
+                  password:secret
+                  scopes:manage-product
+    - check screen shot named: requesting token along with scopes attached
