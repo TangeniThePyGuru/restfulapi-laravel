@@ -19,6 +19,8 @@ class ProductCategoryController extends ApiController
     {
         // protect the index and show controller
         $this->middleware('client.credentials')->only(['index']);
+		$this->middleware('auth:api')->except(['index']);
+		$this->middleware('scope:manage-product')->except(['index']);
     }
 
 
