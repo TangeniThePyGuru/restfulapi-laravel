@@ -18,13 +18,15 @@ class ProductBuyerTransactionController extends ApiController
         parent::__construct();
 
         $this->middleware('transform.input:'. TransactionTransformer::class)->only(['store']);
+		$this->middleware('auth:api')->only(['store']);
+		$this->middleware('scope:purchase-product')->only(['store']);
     }
 
     public function store(Request $request, Product $product, User $buyer){
 
 
         $rules = [
-            'quantity' => 'required|integer|min:1'
+            'quantity_id' => 'required|integer|min:1'
         ];
 
         $this->validate($request, $rules);
