@@ -1,3 +1,6 @@
+http status code:
+    https://en.wikipedia.org/wiki/List_of_HTTP_status_codes
+
 files:
     add domain to config file /etc/hosts
     php vendor/bin/homestead make
