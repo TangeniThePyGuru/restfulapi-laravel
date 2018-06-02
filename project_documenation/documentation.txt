@@ -303,3 +303,12 @@ Requesting token along with scopes
                   password:secret
                   scopes:manage-product
     - check screen shot named: requesting token along with scopes attached
+
+Gates and Policies
+    - Policies - run php artisan make:policy 'PolicyName' --model=ModelName
+               - you find it in the Policies folder under the app folder
+               - register the policy in the AuthServiceProvider:
+                  protected $policies = [
+                      Buyer::class => BuyerPolicy::class
+                  ];
+               - apply it in your controller constructor: $this->middleware('can:view,buyer')->only('show');
