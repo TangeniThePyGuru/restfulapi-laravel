@@ -312,3 +312,14 @@ Gates and Policies
                       Buyer::class => BuyerPolicy::class
                   ];
                - apply it in your controller constructor: $this->middleware('can:view,buyer')->only('show');
+
+    - Give admin roles the power to run everything
+               - include the following code in all the policies or use a trait:
+                    public function before(User $user, $ability)
+                 		{
+                 			if ($user->isAdmin()){
+                 				return true;
+                 			}
+
+                 			return false;
+                 		}
