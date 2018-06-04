@@ -15,6 +15,7 @@ class CategoryTransactionController extends ApiController
      */
     public function index(Category $category)
     {
+		$this->allowedAdminAction();
         // whereHas() checks that a relation is not null
         // collapse() removes the null elements
         $transactions = $category->products()

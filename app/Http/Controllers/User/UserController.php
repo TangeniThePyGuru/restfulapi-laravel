@@ -33,6 +33,7 @@ class UserController extends ApiController
      */
     public function index()
     {
+		$this->allowedAdminAction();
         $users = User::all();
 
         // code 200 means successful
@@ -90,7 +91,6 @@ class UserController extends ApiController
      */
     public function update(Request $request, User $user)
     {
-
         $rules = [
             'email' => 'email|unique:users,email,' . $user->id ,
             'password' => 'min:6|confirmed',
@@ -116,7 +116,8 @@ class UserController extends ApiController
 
         // if user is changing roles
         if ($request->has('admin')){
-            // if user if not verified
+			$this->allowedAdminAction();
+        	// if user if not verified
             if (!$user->isVerified()){
                 // code 409 specifies a conflict
                 return  $this->errorResponse('Only verified users can modify the admin field', 409);

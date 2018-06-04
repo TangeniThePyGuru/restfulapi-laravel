@@ -36,7 +36,7 @@ class CategoryController extends ApiController
      */
     public function store(Request $request)
     {
-
+		$this->allowedAdminAction();
         $rules = [
             'name' => 'required',
             'description' => 'required'
@@ -69,6 +69,7 @@ class CategoryController extends ApiController
      */
     public function update(Request $request, Category $category)
     {
+		$this->allowedAdminAction();
         // make sure that only those fields are passed and updated
         $category->fill($request->only([
             'name',
@@ -96,6 +97,7 @@ class CategoryController extends ApiController
      */
     public function destroy(Category $category)
     {
+		$this->allowedAdminAction();
         $category->delete();
 
         return $this->showOne($category);

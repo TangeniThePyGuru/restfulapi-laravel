@@ -15,6 +15,7 @@ class CategorySellerController extends ApiController
      */
     public function index(Category $category)
     {
+		$this->allowedAdminAction();
         // values() removes any empty elements that might exist
         $sellers = $category->products()->with('seller')
             ->get()
