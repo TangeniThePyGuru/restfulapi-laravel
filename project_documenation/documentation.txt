@@ -358,3 +358,13 @@ CORS (Cross Origin Scripting) - this allows your api to communicate with differe
             .
             .
         ]
+
+Allowing CORS on Error Responses Too - when an error is triggered it happens so early that the CORS middleware is not executed at this point
+        - public function render($request, Exception $exception)
+              {
+          		$response = $this->handleException($request, $exception);
+
+                  app(CorsService::class)->addActualRequestHeaders($response, $request);
+
+          		return $response;
+              }

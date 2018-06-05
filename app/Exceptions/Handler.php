@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use App\Traits\ApiResponser;
+use Asm89\Stack\CorsService;
 use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
@@ -60,62 +61,75 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+		$response = $this->handleException($request, $exception);
 
-        if ($exception instanceof ValidationException){
-            return $this->convertValidationExceptionToResponse($exception, $request);
-        }
-        // hanled the model not found exception
-        if ($exception instanceof ModelNotFoundException) {
-            $modeName = class_basename($exception->getModel());
-            return $this->errorResponse("{$modeName} with specified identifier does not exist.",
-                404);
-        }
-        // handle the authentication Exception
-        if ($exception instanceof AuthenticationException){
-            return $this->unauthenticated($request, $exception);
-        }
-        // handles authorization
-        if ($exception instanceof AuthorizationException){
-            // error code 403 represents unauthorized user
-            return $this->errorResponse($exception->getMessage(), 403);
-        }
-        // handles the case when user requests an api URL with an invalid HTTP request method
-        if ($exception instanceof MethodNotAllowedHttpException){
-            return $this->errorResponse('The specified method for the request is invalid', 405);
-        }
-        // handles the case when a user requests for a URL that does not exist
-        if ($exception instanceof NotFoundHttpException){
-            return $this->errorResponse('The specified URL cannot be found', 404);
-        }
+        app(CorsService::class)->addActualRequestHeaders($response, $request);
 
-        // handles all the possible exceptions that we did not cater for
-        if ($exception instanceof HttpException){
-            return $this->errorResponse($exception->getMessage(), $exception->getStatusCode());
-        }
+		return $response;
+    }
 
-        // handles for when you try to remove a resource that has other resources depending on it
-        if ($exception instanceof QueryException){
-            $errorCode = $exception->errorInfo[1];
+	/**
+	 * @param $request
+	 * @param $exception
+	 * @return $this|\Illuminate\Http\JsonResponse|\Illuminate\Http\Response|\Symfony\Component\HttpFoundation\Response
+	 */
+	private function handleException($request, $exception)
+	{
+		if ($exception instanceof ValidationException){
+			return $this->convertValidationExceptionToResponse($exception, $request);
+		}
+		// hanled the model not found exception
+		if ($exception instanceof ModelNotFoundException) {
+			$modeName = class_basename($exception->getModel());
+			return $this->errorResponse("{$modeName} with specified identifier does not exist.",
+				404);
+		}
+		// handle the authentication Exception
+		if ($exception instanceof AuthenticationException){
+			return $this->unauthenticated($request, $exception);
+		}
+		// handles authorization
+		if ($exception instanceof AuthorizationException){
+			// error code 403 represents unauthorized user
+			return $this->errorResponse($exception->getMessage(), 403);
+		}
+		// handles the case when user requests an api URL with an invalid HTTP request method
+		if ($exception instanceof MethodNotAllowedHttpException){
+			return $this->errorResponse('The specified method for the request is invalid', 405);
+		}
+		// handles the case when a user requests for a URL that does not exist
+		if ($exception instanceof NotFoundHttpException){
+			return $this->errorResponse('The specified URL cannot be found', 404);
+		}
 
-            if ($errorCode == 1451){
-                // code 409 mean conflict
-                return $this->errorResponse('Cannot remove this resource permanently, it is related ot other resources',
-                    409);
-            }
-        }
+		// handles all the possible exceptions that we did not cater for
+		if ($exception instanceof HttpException){
+			return $this->errorResponse($exception->getMessage(), $exception->getStatusCode());
+		}
+
+		// handles for when you try to remove a resource that has other resources depending on it
+		if ($exception instanceof QueryException){
+			$errorCode = $exception->errorInfo[1];
+
+			if ($errorCode == 1451){
+				// code 409 mean conflict
+				return $this->errorResponse('Cannot remove this resource permanently, it is related ot other resources',
+					409);
+			}
+		}
 
 //        handling the csrf TokenMismatchtokenException
-        if ($exception instanceof TokenMismatchException){
-            return redirect()->back()->withInput($request->input());
-        }
+		if ($exception instanceof TokenMismatchException){
+			return redirect()->back()->withInput($request->input());
+		}
 
-        // handles the exception when the database server is not responding (off / unreachable) in development
-        if (config('app.debug')){
-            return parent::render($request, $exception);
-        }
-        // handles the exception when the database server is not responding (off / unreachable) in production
-        return $this->errorResponse('Unexpected Exception. Try later', 500);
-    }
+		// handles the exception when the database server is not responding (off / unreachable) in development
+		if (config('app.debug')){
+			return parent::render($request, $exception);
+		}
+		// handles the exception when the database server is not responding (off / unreachable) in production
+		return $this->errorResponse('Unexpected Exception. Try later', 500);
+	}
 
     /**
      * Convert an authentication exception into a response.
