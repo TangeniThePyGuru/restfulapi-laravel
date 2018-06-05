@@ -323,3 +323,38 @@ Gates and Policies
 
                  			return false;
                  		}
+    - Gates
+        /**
+         * 'admin-action' -> name of the gate
+         * function -> closure with the action that we are going to validate
+         */
+        Gate::define('admin-action', function(User $user){
+            return $user->isAdmin();
+        });
+
+    - protected function allowedAdminAction(){
+            if (Gate::denies('admin-action')){
+                throw new AuthorizationException('This action is unauthorized');
+            }
+      }
+
+CORS (Cross Origin Scripting) - this allows your api to communicate with different browser clients,
+                                especially when using clients bases on Javascript.
+   - Testing The CORS
+        go to test-cors.org
+   - Installing CORS
+        composer require barryvdh/laravel-cors
+        cofig/app.php
+        - register the ServiceProvider
+           \Barryvdh\Cors\ServiceProvider::class
+        - publish the provider
+            php artisan config vendor:publish --provider="Barryvdh\Cors\ServiceProvider"
+        - check the file app.php and live it as it is.
+        - Register the middleware in the Kernel.php
+            'cors' => \Barryvdh\Cors\HandleCors::class
+        - add it to the api middleware array [
+            'cors'
+            .
+            .
+            .
+        ]
