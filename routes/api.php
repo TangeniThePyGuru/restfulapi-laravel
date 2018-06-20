@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,4 +69,9 @@ Route::name('resend')->get('users/{user}/resend', 'User\UserController@resend');
 /**
  * OAuth stuff
  */
-Route::post('oauth/token', '\Laravel\Passport\Http\Controllers\AccessTokenController@issueToken');
+Route::post('oauth/token', '\Laravel\Passport\Http\Controllers\AccessTokenController@issueToken')->name('issue-token');
+
+/**
+ *  get token with email and password
+ */
+Route::post('authenticate', 'Auth\ApiAuthController@getToken');
