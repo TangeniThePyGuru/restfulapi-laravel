@@ -5,6 +5,7 @@ namespace App\Exceptions;
 use App\Traits\ApiResponser;
 use Asm89\Stack\CorsService;
 use Exception;
+use GuzzleHttp\Exception\ClientException;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -122,6 +123,11 @@ class Handler extends ExceptionHandler
 		if ($exception instanceof TokenMismatchException){
 			return redirect()->back()->withInput($request->input());
 		}
+
+		if ($exception instanceof ClientException){
+//		    handles the client exception
+		    return $this->errorResponse($exception->getMessage(), $exception->getCode());
+        }
 
 		// handles the exception when the database server is not responding (off / unreachable) in development
 		if (config('app.debug')){
