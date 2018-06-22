@@ -75,3 +75,11 @@ Route::post('oauth/token', '\Laravel\Passport\Http\Controllers\AccessTokenContro
  *  get token with email and password
  */
 Route::post('authenticate', 'Auth\ApiAuthController@getToken');
+/**
+ *  Current logged-in user
+ */
+Route::group(['prefix' => 'user'], function (){
+   Route::middleware('auth:api')->post('/', function (){
+       return response()->json(request()->user());
+   });
+});
