@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\ApiController;
 use Illuminate\Http\Request;
 use GuzzleHttp;
+use Illuminate\Support\Collection;
 
 class ApiAuthController extends ApiController
 {
@@ -26,11 +27,20 @@ class ApiAuthController extends ApiController
                'client_secret' => 'WVlcS4uaBqHdURk68F1FkBtgUQpnFJ2TOQikFv9m',
                'username' => $request->username,
                'password' => $request->password,
-               'scope' => '',
+               'scope' => !$request->scopes ? '*': $request->scopes,
            ],
        ]);
 
-       return json_decode((string) $response->getBody(), true);
 
+      $user = $http->post(url('user'), [
+           'headers' => [
+               'Authorization' => 'Bearer '.json_decode((string) $response->getBody())->access_token
+           ]
+       ]);
+
+        Collection::make(['user' => (string) $user->getBody(), 'auth' => (string) $response->getBody() ]);
+
+       return json_decode(Collection::make(['user' => json_decode((string) $user->getBody(), true),
+                                            'auth' => json_decode((string) $response->getBody()) ]), true);
     }
 }
