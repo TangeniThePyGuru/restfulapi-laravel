@@ -17,10 +17,11 @@ class TransactionCategoryController extends ApiController
         // protect the index and show controller
         $this->middleware('client.credentials')->only(['index']);
     }
+
     /**
      * Display a listing of the resource.
      * @param Transaction $transaction
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index(Transaction $transaction)
     {

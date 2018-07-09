@@ -14,10 +14,12 @@ class TransactionController extends ApiController
 		$this->middleware('scope:read-general')->only('show');
 		$this->middleware('can:view,transaction')->only('show');
 	}
+
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function index()
     {
@@ -32,7 +34,7 @@ class TransactionController extends ApiController
      * Display the specified resource.
      *
      * @param  Transaction $transaction
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function show(Transaction $transaction)
     {
