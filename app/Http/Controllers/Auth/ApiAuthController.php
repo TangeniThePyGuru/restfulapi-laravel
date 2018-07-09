@@ -23,8 +23,8 @@ class ApiAuthController extends ApiController
        $response = $http->post(url('oauth/token'), [
            'form_params' => [
                'grant_type' => 'password',
-               'client_id' => 3,
-               'client_secret' => 'WVlcS4uaBqHdURk68F1FkBtgUQpnFJ2TOQikFv9m',
+               'client_id' => env('API_CLIENT_ID'),
+               'client_secret' => env('API_CLIENT_SECRET'),
                'username' => $request->username,
                'password' => $request->password,
                'scope' => !$request->scopes ? '*': $request->scopes,
