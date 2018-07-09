@@ -48,8 +48,9 @@ class SellerProductController extends ApiController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  \Illuminate\Http\Request $request
+     * @param User $seller
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request, User $seller)
     {
@@ -76,10 +77,10 @@ class SellerProductController extends ApiController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Seller  $seller
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Seller $seller
      * @param Product $product
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, Seller $seller, Product $product)
     {
@@ -132,9 +133,10 @@ class SellerProductController extends ApiController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Seller  $seller
+     * @param  \App\Seller $seller
      * @param Product $product
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
      */
     public function destroy(Seller $seller, Product $product)
     {
