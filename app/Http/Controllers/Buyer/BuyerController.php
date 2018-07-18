@@ -20,10 +20,11 @@ class BuyerController extends ApiController
 		$this->middleware('can:view,buyer')->only('show');
 	}
 
-	/**
+    /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
+     * @throws AuthorizationException
      */
     public function index()
     {
@@ -34,12 +35,11 @@ class BuyerController extends ApiController
     }
 
 
-
     /**
      * Display the specified resource.
      *
-     * @param  Buyer  $buyer
-     * @return \Illuminate\Http\Response
+     * @param  Buyer $buyer
+     * @return \Illuminate\Http\JsonResponse
      */
     public function show(Buyer $buyer)
     {
