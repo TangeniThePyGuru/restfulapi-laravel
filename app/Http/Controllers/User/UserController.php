@@ -29,7 +29,8 @@ class UserController extends ApiController
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function index()
     {
@@ -44,8 +45,8 @@ class UserController extends ApiController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request)
     {
@@ -73,7 +74,7 @@ class UserController extends ApiController
      * Display the specified resource.
      *
      * @param  User $user
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function show(User $user)
     {
@@ -85,9 +86,10 @@ class UserController extends ApiController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @param  User $user
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function update(Request $request, User $user)
     {
@@ -142,7 +144,8 @@ class UserController extends ApiController
      * Remove the specified resource from storage.
      *
      * @param  User $user
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
      */
     public function destroy(User $user)
     {
@@ -173,9 +176,12 @@ class UserController extends ApiController
             return $this->errorResponse('This user is already verified', 409);
         }
 
-        retry(5, function () use ($user){
-            Mail::to($user)->send(new UserCreated($user));
-        }, 100);
+        try {
+            retry(5, function () use ($user) {
+                Mail::to($user)->send(new UserCreated($user));
+            }, 100);
+        } catch (\Exception $e) {
+        }
 
         return $this->showMessage('The verification email has been resend');
     }
